@@ -59,43 +59,37 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="p-6 min-h-screen">
+    <main className="py-16 mx-auto md:px-6 min-h-screen">
       <ClientSearch />
       {/* Top Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white shadow-md rounded-2xl">
-          <div className="flex items-center gap-4 p-6">
-            <Users className="text-[#00A6A6]" size={32} />
-            <div>
-              <h2 className="text-xl font-bold text-[#1E293B]">{clientCount}</h2>
-              <p className="text-sm text-[#64748B]">Total Clients</p>
-            </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white shadow-md rounded-2xl p-6 flex items-center gap-4">
+          <Users className="text-[#00A6A6]" size={32} />
+          <div>
+            <h2 className="text-xl font-bold text-[#1E293B]">{clientCount}</h2>
+            <p className="text-sm text-[#64748B]">Total Clients</p>
           </div>
         </div>
-        <div className="bg-white shadow-md rounded-2xl">
-          <div className="flex items-center gap-4 p-6">
-            <BarChart3 className="text-[#007C7C]" size={32} />
-            <div>
-              <h2 className="text-xl font-bold text-[#1E293B]">{programCount}</h2>
-              <p className="text-sm text-[#64748B]">Programs Offered</p>
-            </div>
+        <div className="bg-white shadow-md rounded-2xl p-6 flex items-center gap-4">
+          <BarChart3 className="text-[#007C7C]" size={32} />
+          <div>
+            <h2 className="text-xl font-bold text-[#1E293B]">{programCount}</h2>
+            <p className="text-sm text-[#64748B]">Programs Offered</p>
           </div>
         </div>
-        <div className="bg-white shadow-md rounded-2xl">
-          <div className="flex items-center gap-4 p-6">
-            <Activity className="text-[#38BDF8]" size={32} />
-            <div>
-              <h2 className="text-xl font-bold text-[#1E293B]">
-                {Math.min(clientCount, 5)}
-              </h2>
-              <p className="text-sm text-[#64748B]">Active Today</p>
-            </div>
+        <div className="bg-white shadow-md rounded-2xl p-6 flex items-center gap-4">
+          <Activity className="text-[#38BDF8]" size={32} />
+          <div>
+            <h2 className="text-xl font-bold text-[#1E293B]">
+              {Math.min(clientCount, 5)}
+            </h2>
+            <p className="text-sm text-[#64748B]">Active Today</p>
           </div>
         </div>
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
         <div className="bg-white shadow-md rounded-2xl">
           <div className="p-6">
             <h2 className="text-lg font-semibold mb-4 text-[#1E293B]">Clients Growth</h2>
