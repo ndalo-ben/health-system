@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
             program_id,
         }));
 
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from("client_programs")
             .insert(enrollments);
 

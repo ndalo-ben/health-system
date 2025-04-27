@@ -1,103 +1,155 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { BarChart3, Users, Activity } from "lucide-react";
+import { LineChart, Line, PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import ClientSearch from "./components/Searhcbar";
+
+export default function DashboardPage() {
+  const [clients, setClients] = useState<{ id: number; first_name: string; created_at: string }[]>([]);
+  const [programs, setPrograms] = useState<{ id: number; name: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const { data: clientsData, error: clientsError } = await supabase
+        .from('clients')
+        .select('id, first_name, created_at')
+        .order('created_at', { ascending: false });
+
+      const { data: programsData, error: programsError } = await supabase
+        .from('programs')
+        .select('id, name');
+
+      if (!clientsError && clientsData) {
+        setClients(clientsData);
+      }
+      if (!programsError && programsData) {
+        setPrograms(programsData);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const clientCount = clients.length;
+  const programCount = programs.length;
+  const recentClients = clients.slice(0, 5);
+
+  const dataGrowth = [
+    { month: "Jan", clients: Math.floor(clientCount * 0.2) },
+    { month: "Feb", clients: Math.floor(clientCount * 0.4) },
+    { month: "Mar", clients: Math.floor(clientCount * 0.6) },
+    { month: "Apr", clients: Math.floor(clientCount * 0.8) },
+    { month: "May", clients: clientCount },
+  ];
+
+  const programData = programs.map((program) => ({
+    name: program.name,
+    value: Math.floor(Math.random() * 100) + 10, // Optional: Replace with real enrollment data later
+  }));
+
+  const COLORS = ['#00A6A6', '#007C7C', '#38BDF8', '#5EEAD4', '#FBBF24', '#34D399'];
+
+  if (loading) {
+    return <main className="flex w-full items-center justify-center h-screen">Loading...</main>;
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="p-6 min-h-screen">
+      <ClientSearch />
+      {/* Top Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white shadow-md rounded-2xl">
+          <div className="flex items-center gap-4 p-6">
+            <Users className="text-[#00A6A6]" size={32} />
+            <div>
+              <h2 className="text-xl font-bold text-[#1E293B]">{clientCount}</h2>
+              <p className="text-sm text-[#64748B]">Total Clients</p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="bg-white shadow-md rounded-2xl">
+          <div className="flex items-center gap-4 p-6">
+            <BarChart3 className="text-[#007C7C]" size={32} />
+            <div>
+              <h2 className="text-xl font-bold text-[#1E293B]">{programCount}</h2>
+              <p className="text-sm text-[#64748B]">Programs Offered</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white shadow-md rounded-2xl">
+          <div className="flex items-center gap-4 p-6">
+            <Activity className="text-[#38BDF8]" size={32} />
+            <div>
+              <h2 className="text-xl font-bold text-[#1E293B]">
+                {Math.min(clientCount, 5)}
+              </h2>
+              <p className="text-sm text-[#64748B]">Active Today</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="bg-white shadow-md rounded-2xl">
+          <div className="p-6">
+            <h2 className="text-lg font-semibold mb-4 text-[#1E293B]">Clients Growth</h2>
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={dataGrowth}>
+                <Line type="monotone" dataKey="clients" stroke="#00A6A6" strokeWidth={3} />
+                <Tooltip />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white shadow-md rounded-2xl">
+          <div className="p-6">
+            <h2 className="text-lg font-semibold mb-4 text-[#1E293B]">Program Enrollment</h2>
+            <ResponsiveContainer width="100%" height={250}>
+              <PieChart>
+                <Pie
+                  data={programData}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={100}
+                  label
+                >
+                  {programData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Clients */}
+      <div className="bg-white shadow-md rounded-2xl mb-8">
+        <div className="p-6">
+          <h2 className="text-lg font-semibold mb-4 text-[#1E293B]">Recent Clients</h2>
+          <ul className="space-y-4">
+            {recentClients.length > 0 ? (
+              recentClients.map((client, idx) => (
+                <li key={idx} className="flex justify-between text-[#64748B]">
+                  <span>{client.first_name}</span>
+                  <span className="text-sm">{new Date(client.created_at).toLocaleDateString()}</span>
+                </li>
+              ))
+            ) : (
+              <li className="text-center text-[#64748B]">No clients yet</li>
+            )}
+          </ul>
+        </div>
+      </div>
+
+    </main>
   );
 }
