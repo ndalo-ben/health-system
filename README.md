@@ -51,9 +51,16 @@ The platform uses Supabase for the backend and provides a clean, responsive, and
 
 ## Screenshots
 
-|                 Home Page                 |                      Create Program                      |                     Clients List                     |                      Client Profile                      |
-| :---------------------------------------: | :------------------------------------------------------: | :--------------------------------------------------: | :------------------------------------------------------: |
+|           Home Page           |                Create Program                |              Clients List               |                Client Profile                |
+| :---------------------------: | :------------------------------------------: | :-------------------------------------: | :------------------------------------------: |
 | ![Home Page](public/home.png) | ![Create Program](public/create-program.png) | ![Clients List](public/client-list.png) | ![Client Profile](public/client-profile.png) |
+
+---
+
+## 📂 Downloadable Files
+
+- [📄 PowerPoint Presentation](./assets/Health-Program-Presentation.ppt)
+- [📄 Prototype Demo ](./assets/Health-System-Prototype.ppt)
 
 ---
 
