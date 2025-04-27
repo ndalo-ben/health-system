@@ -62,13 +62,13 @@ export default function EnrollPage() {
     };
 
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen p-4">
-            <h1 className="text-2xl font-bold mb-6">Enroll Client into Programs</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col gap-4">
+        <main className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Enroll Client into Programs</h1>
+            <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-md space-y-6">
                 <select
                     value={selectedClient}
                     onChange={(e) => setSelectedClient(e.target.value)}
-                    className="border p-2 rounded"
+                    className="border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                 >
                     <option value="">Select a Client</option>
@@ -81,7 +81,7 @@ export default function EnrollPage() {
 
                 <div className="flex flex-col gap-2">
                     {programs.map((program) => (
-                        <label key={program.id} className="flex items-center gap-2">
+                        <label key={program.id} className="flex items-center gap-2 text-gray-700">
                             <input
                                 type="checkbox"
                                 value={program.id}
@@ -93,6 +93,7 @@ export default function EnrollPage() {
                                         setSelectedPrograms(selectedPrograms.filter((id) => id !== program.id));
                                     }
                                 }}
+                                className="focus:ring-green-500"
                             />
                             {program.name}
                         </label>
@@ -101,7 +102,7 @@ export default function EnrollPage() {
 
                 <button
                     type="submit"
-                    className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+                    className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                     disabled={loading}
                 >
                     {loading ? "Enrolling..." : "Enroll Client"}

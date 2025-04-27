@@ -32,31 +32,39 @@ export default function Dashboard() {
     };
 
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen p-4">
-            <h1 className="text-2xl font-bold mb-6">Create Health Program</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col gap-4">
-                <input
-                    type="text"
-                    placeholder="Program Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="border p-2 rounded"
-                    required
-                />
-                <textarea
-                    placeholder="Program Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="border p-2 rounded"
-                />
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
-                    disabled={loading}
-                >
-                    {loading ? "Creating..." : "Create Program"}
-                </button>
-            </form>
+        <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+            <h1 className="text-3xl font-semibold text-gray-800 mb-8">Create Health Program</h1>
+            <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Program Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <textarea
+                            placeholder="Program Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300"
+                        />
+                    </div>
+                    <div className="text-center">
+                        <button
+                            type="submit"
+                            className="w-full py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-gradient-to-l hover:from-green-500 hover:to-green-600 transition duration-300"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating..." : "Create Program"}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </main>
     );
 }

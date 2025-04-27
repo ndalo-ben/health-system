@@ -26,7 +26,7 @@ export default function Sidebar() {
             </div>
 
             {/* Sidebar */}
-            <div className={`fixed inset-y-0 left-0 transform bg-white border-r h-screen w-64 p-6 pt-20 md:pt-6 space-y-6 transition-transform duration-300 ease-in-out z-30
+            <div className={`fixed inset-y-0 left-0 transform bg-white border-r border-blue-50 h-screen w-64 p-6 pt-20 md:pt-6 space-y-6 transition-transform duration-300 ease-in-out z-30
         ${open ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0 md:static md:inset-0
       `}>

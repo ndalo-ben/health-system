@@ -40,57 +40,61 @@ export default function ClientsPage() {
     };
 
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen p-4">
-            <h1 className="text-2xl font-bold mb-6">Register New Client</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col gap-4">
-                <input
-                    type="text"
-                    name="first_name"
-                    placeholder="First Name"
-                    value={form.first_name}
-                    onChange={handleChange}
-                    className="border p-2 rounded"
-                    required
-                />
-                <input
-                    type="text"
-                    name="last_name"
-                    placeholder="Last Name"
-                    value={form.last_name}
-                    onChange={handleChange}
-                    className="border p-2 rounded"
-                    required
-                />
-                <input
-                    type="date"
-                    name="dob"
-                    value={form.dob}
-                    onChange={handleChange}
-                    className="border p-2 rounded"
-                    required
-                />
-                <select
-                    name="gender"
-                    value={form.gender}
-                    onChange={handleChange}
-                    className="border p-2 rounded"
-                >
-                    <option value="">Select Gender (Optional)</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+        <main className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">Register New Client</h1>
+            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name"
+                        value={form.first_name}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        value={form.last_name}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required
+                    />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input
+                        type="date"
+                        name="dob"
+                        value={form.dob}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required
+                    />
+                    <select
+                        name="gender"
+                        value={form.gender}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                        <option value="">Select Gender (Optional)</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
                 <input
                     type="text"
                     name="contact"
-                    placeholder="Contact (Optional)"
+                    placeholder="Email (johndoe@gmail.com)"
                     value={form.contact}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    className="border border-gray-300 py-4 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <button
                     type="submit"
-                    className="bg-green-600 text-white p-2 rounded hover:bg-green-700 transition"
+                    className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                     disabled={loading}
                 >
                     {loading ? "Registering..." : "Register Client"}
