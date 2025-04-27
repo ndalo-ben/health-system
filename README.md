@@ -1,26 +1,59 @@
 # Health System Platform
 
-This is a **Health System Platform** built with [Next.js](https://nextjs.org), designed to allow users to create and manage health programs. The platform provides a simple and intuitive interface for creating programs with a name and description.
+This project is a **Health System Platform** built with [Next.js](https://nextjs.org), [React](https://react.dev/), [Supabase](https://supabase.com/), and [Tailwind CSS](https://tailwindcss.com/).
 
-## Features
+It allows users to:
 
-- Create health programs with a name and description.
-- Responsive and user-friendly UI.
-- Built with modern web technologies like React, Next.js, and Tailwind CSS.
-- API integration for program creation.
-- Ready for deployment on platforms like Vercel.
+- **Create health programs** by providing a program name and description.
+- **Manage client profiles**.
+- **Enroll clients into health programs**.
+- **View client profiles and their program enrollments**.
+
+The platform uses Supabase for the backend and provides a clean, responsive, and modern interface for managing health programs and client records.
 
 ---
 
 ## Table of Contents
 
-1. [Getting Started](#getting-started)
-2. [Folder Structure](#folder-structure)
-3. [Development](#development)
-4. [Deployment](#deployment)
-5. [API Endpoints](#api-endpoints)
-6. [Technologies Used](#technologies-used)
-7. [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Folder Structure](#folder-structure)
+- [Running the Project Locally](#running-the-project-locally)
+- [Deployment](#deployment)
+- [API Endpoints](#api-endpoints)
+- [User Guide](#user-guide)
+- [License](#license)
+
+---
+
+## Tech Stack
+
+- [Next.js 14 (App Router)](https://nextjs.org/)
+- [React 18](https://react.dev/)
+- [Supabase](https://supabase.com/) (PostgreSQL database, API)
+- [Tailwind CSS](https://tailwindcss.com/) (styling)
+- [TypeScript](https://www.typescriptlang.org/)
+
+---
+
+## Features
+
+- Create a new health program by providing a **program name** and **description**.
+- View all **created health programs**.
+- Create new **client profiles** (first name, last name, email).
+- Enroll **clients into programs** with start and end dates.
+- View individual **client profiles**, including programs they are enrolled in.
+- Responsive design for desktop and mobile screens.
+
+---
+
+## Screenshots
+
+|                 Home Page                 |                      Create Program                      |                     Clients List                     |                      Client Profile                      |
+| :---------------------------------------: | :------------------------------------------------------: | :--------------------------------------------------: | :------------------------------------------------------: |
+| ![Home Page](public/home.png) | ![Create Program](public/create-program.png) | ![Clients List](public/client-list.png) | ![Client Profile](public/client-profile.png) |
 
 ---
 
@@ -28,39 +61,37 @@ This is a **Health System Platform** built with [Next.js](https://nextjs.org), d
 
 ### Prerequisites
 
-Ensure you have the following installed:
-
-- [Node.js](https://nodejs.org) (v16 or higher recommended)
+- [Node.js](https://nodejs.org/en) (v16+)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Git](https://git-scm.com/)
+- [Supabase account](https://supabase.com/)
 
 ### Installation
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/ndalo-ben/health-system.git
-   cd health-system
-   ```
+```bash
+git clone https://github.com/ndalo-ben/health-system-platform.git
+cd health-system-platform
+```
 
 2. Install dependencies:
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+```bash
+npm install
+# or
+yarn install
+```
 
 3. Set up environment variables:
 
-   Create a `.env.local` file in the root directory and add the following:
+Create a `.env.local` file in the root folder and add:
 
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=<your-supabase-url>
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
-   ```
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
 
-   Replace `<your-supabase-url>` and `<your-supabase-anon-key>` with your Supabase credentials.
+You can get these values from your Supabase project settings.
 
 ---
 
@@ -68,27 +99,27 @@ Ensure you have the following installed:
 
 ```plaintext
 .
-├── app/                     # Application pages and components
-│   ├── create-program/      # Create Program page
-│   ├── components/          # Shared components
+├── app/
+│   ├── create-program/     # Create Program page
+│   ├── clients/             # Clients listing and profiles
+│   ├── components/          # Reusable components
 │   ├── layout.tsx           # Root layout
 │   ├── page.tsx             # Home page
-├── lib/                     # Utility libraries
-│   └── supabase.ts          # Supabase client setup
-├── public/                  # Static assets
-├── .next/                   # Next.js build output
-├── package.json             # Project metadata and scripts
-├── README.md                # Documentation
-└── tsconfig.json            # TypeScript configuration
+│   ├── globals.css          # Tailwind global styles
+├── lib/
+│   └── supabase.ts          # Supabase client
+├── public/
+│   └── screenshots/         # App screenshots
+├── .env.local               # Environment variables (not committed)
+├── package.json             # NPM scripts and project metadata
+├── tailwind.config.ts       # Tailwind CSS configuration
+├── tsconfig.json            # TypeScript configuration
+└── README.md                # Project documentation
 ```
 
 ---
 
-## Development
-
-### Running the Development Server
-
-To start the development server, run:
+## Running the Project Locally
 
 ```bash
 npm run dev
@@ -96,34 +127,32 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
-
-### Editing the Code
-
-You can start editing the app by modifying files in the `app/` directory. The app will automatically reload when you save changes.
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
 ---
 
 ## Deployment
 
-### Deploying on Vercel
+The project can be easily deployed on platforms like [Vercel](https://vercel.com/).
 
-The easiest way to deploy your Next.js app is to use [Vercel](https://vercel.com/):
-
-1. Push your code to a GitHub repository.
-2. Go to [Vercel](https://vercel.com/) and import your repository.
-3. Set up the environment variables in the Vercel dashboard.
-4. Deploy your app.
-
-For more details, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+1. Push your project to GitHub.
+2. Go to [Vercel](https://vercel.com/) and create a new project.
+3. Link your GitHub repository.
+4. Add the environment variables on Vercel.
+5. Deploy 🚀.
 
 ---
 
 ## API Endpoints
 
-### POST `/api/programs`
+The app uses internal API routes to interact with Supabase.  
+Here are the available endpoints:
 
-**Description:** Creates a new health program.
+---
+
+### `POST /api/programs`
+
+**Create a new health program.**
 
 **Request Body:**
 
@@ -134,51 +163,122 @@ For more details, check out the [Next.js deployment documentation](https://nextj
 }
 ```
 
-**Response:**
+**Responses:**
 
-- **200 OK**: Program created successfully.
-- **400 Bad Request**: Validation error or missing fields.
-
----
-
-## Technologies Used
-
-- **Next.js**: React framework for server-side rendering and static site generation.
-- **React**: JavaScript library for building user interfaces.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Supabase**: Backend-as-a-service for database and authentication.
-- **TypeScript**: Typed JavaScript for better developer experience.
+- `200 OK`: Program created successfully.
+- `400 Bad Request`: Validation error.
 
 ---
 
-## Screenshots
+### `POST /api/clients`
 
-### Main Page
+**Create a new client profile.**
 
-![Main Page Screenshot](public/health-system.png)
+**Request Body:**
 
+```json
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "johndoe@example.com"
+}
+```
+
+**Responses:**
+
+- `201 Created`: Client created successfully.
+- `400 Bad Request`: Missing required fields.
 
 ---
 
-## Contributing
+### `GET /api/clients`
 
-Contributions are welcome! Please follow these steps:
+**Get a list of all clients.**
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Commit your changes and push the branch.
-4. Open a pull request.
+**Responses:**
+
+- `200 OK`: Returns a list of clients.
+
+Example:
+
+```json
+[
+  {
+    "id": "client-uuid",
+    "first_name": "John",
+    "last_name": "Doe"
+  },
+  ...
+]
+```
+
+---
+
+### `GET /api/clients/:clientId`
+
+**Get a single client profile and their enrolled programs.**
+
+**Request Parameters:**
+
+- `clientId` (string): ID of the client.
+
+**Responses:**
+
+- `200 OK`: Returns client profile and enrolled programs.
+- `404 Not Found`: Client not found.
+
+Example:
+
+```json
+{
+  "id": "client-id",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john@example.com",
+  "enrolled_programs": [
+    {
+      "program_id": "program-id",
+      "program_name": "Diabetes Health Plan",
+      "start_date": "2025-05-01",
+      "end_date": "2025-08-01"
+    }
+  ]
+}
+```
+
+---
+
+## User Guide
+
+After setting up the project locally or on production:
+
+1. Visit the home page `/`
+   - View all created health programs.
+2. Click **Create New Program**
+   - Fill out the name and description fields.
+   - Submit to add a new health program.
+3. Go to **Clients** page `/clients`
+   - View existing clients.
+   - Add a new client using the **Add Client** button.
+4. Click on a **client** to view their profile:
+   - See the client's details.
+   - See programs they are currently enrolled in.
+5. Enroll a client into a program:
+   - Choose a program from the dropdown.
+   - Select start and end dates.
+   - Submit to enroll the client into the program.
+
+The app uses **Supabase** as the backend database, and all client and program information is stored securely there.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Distributed under the MIT License.  
+See `LICENSE` for more information.
 
 ---
 
-## Acknowledgments
+# Happy Building! 🚀
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Supabase Documentation](https://supabase.com/docs)
+---
