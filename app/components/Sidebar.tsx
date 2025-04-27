@@ -18,7 +18,7 @@ export default function Sidebar() {
     return (
         <div className="flex">
             {/* Mobile Top Bar */}
-            <div className="md:hidden flex items-center justify-between p-4 bg-white shadow-md w-full fixed top-0 z-20">
+            <div className="md:hidden flex items-center justify-between p-6 bg-green-50 shadow-md w-full fixed top-0 z-20">
                 <h1 className="text-xl font-bold text-gray-800">HealthSystem</h1>
                 <button onClick={() => setOpen(!open)}>
                     {open ? <X size={24} /> : <Menu size={24} />}

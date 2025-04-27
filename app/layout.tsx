@@ -32,7 +32,7 @@ export default function RootLayout({
         <div className="w-64 text-white fixed h-full">
           <Sidebar />
         </div>
-
+        
         {/* Content area */}
         <div className="ml-64 w-full p-6">
           {children}
